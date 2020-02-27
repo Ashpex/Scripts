@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-passDir=/home/ashpex/Downloads/pass/
+passDir=/home/ashpex/Downloads/token/
 
 PS3='Please enter your choice: '
 options=("GitHub" "CodeBerg" "Quit")
