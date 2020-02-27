@@ -27,6 +27,9 @@ clear
 
 ### Setting wifi ###
 # Delete this if you don't require wifi network to set up.
+echo "========================================================================================="
+echo "Setting up wifi"
+echo "========================================================================================="
 ip link
 wifi-menu
 
@@ -45,6 +48,9 @@ timedatectl set-ntp true
 
 ### Setup the disk and partitions ###
 #swap_size=$(free --mebi | awk '/Mem:/ {print $2}')
+echo "========================================================================================="
+echo "Setting disk partition"
+echo "========================================================================================="
 swap_size=40000
 swap_end=$(( $swap_size + 512 + 1 ))MiB
 
@@ -69,6 +75,9 @@ mount "${part_boot}" /mnt/boot
 ### Install and configure the basic system ###
 
 # you can find your closest server from: https://www.archlinux.org/mirrorlist/all/
+echo "========================================================================================="
+echo "Basic system setup"
+echo "========================================================================================="
 echo 'Server = http://mirrors.evowise.com/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
 pacstrap /mnt base linux linux-firmware neovim
 genfstab -U /mnt
@@ -88,11 +97,17 @@ echo "LANG=en_US.UFT-8" > /etc/locale.conf
 localectl set-locale LANG=en_US.UTF-8
 
 ### Setting up Bootloader ###
+echo "========================================================================================="
+echo "Setting up Bootloader"
+echo "========================================================================================="
 pacman -S grub efibootmgr
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
 
 ### Setting up network###
+echo "========================================================================================="
+echo "Setting up network"
+echo "========================================================================================="
 pacman -S networkmanager wireless_tools wpa_supplicant network-manager-applet
 
 echo "Done. Rebooting...."
